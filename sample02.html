@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>02 Droppable | jQuery UI / Drag and Drop</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+</head>
+<body>
+<style>
+  body {
+    margin: 20px;
+  }
+  .item_v2 {
+    padding: 10px;
+    width: 80px;
+    height: 80px;
+    background-color: #2e6da4;
+    color: #FFFFFF;
+  }
+  .item_v2:hover {
+    cursor: pointer;
+  }
+  .drop_area_v2 {
+    margin-top: 50px;
+    width: 200px;
+    height: 200px;
+    border: 1px solid #3a945b;
+    background: #f0fff0;
+  }
+  .drop_area_v2 p {
+    margin: 10px;
+  }
+</style>
+
+<div id="container_v2">
+  <div class="item_v2">
+    <p>ドラッグしてください</p>
+  </div>
+
+  <div class="drop_area_v2">
+    <p>ドロップエリア</p>
+  </div>
+</div>
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/jquery-ui-1.2.1.min.js"></script>
+<script>
+  $(function() {
+    $('.item_v2').draggable();
+    $('.drop_area_v2').droppable({
+      activate: function(e,ui) {
+        $(this)
+          .find("p")
+          .html("ドラッグが開始されました");
+      },
+      over: function(e,ui) {
+        $(this)
+          .css('background', '#e0ffff')
+          .css('border', '2px solid #00bfff')
+          .find("p")
+          .html("ドロップエリアに入りました" );
+      },
+      out: function(e,ui) {
+        $(this)
+          .css('background', '#ffffe0')
+          .css('border', '2px solid #ffff00')
+          .find("p")
+          .html("ドロップエリアから外れました");
+      },
+      drop: function(e,ui) {
+        $(this)
+          .addClass("ui-state-highlight")
+          .css('background', '#fdf5e6')
+          .css('border', '2px solid #ffa07a')
+          .find( "p" )
+          .html( "ドロップされました" );
+      }
+    });
+  });
+</script>
+</body>
+</html>
